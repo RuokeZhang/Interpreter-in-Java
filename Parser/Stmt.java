@@ -31,7 +31,6 @@ public class Stmt {
      */
     void parse(Scanner s) throws IOException {
         stmtType = s.currentToken();
-        System.out.println("stmtType: " + stmtType);
         // Parsing if-statement
         if (stmtType == Core.IF) {
             ifKeyword = new IfKeyword(vTable);
