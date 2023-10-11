@@ -1,0 +1,13 @@
+start parsing stmtSeq  
+Parsing a statement sequence..., token found is ARRAY
+stmtType: ARRAY
+stmtType: ID
+x := new integer[5];
+stmtType: ID
+x[3] := 5;
+stmtType: OUT
+x := new integer[5];
+Assigning x to new integer array of size 5
+x[3] := 5;
+Assigning x[3] to 5
+0

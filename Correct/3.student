@@ -1,0 +1,5 @@
+start parsing stmtSeq  
+Parsing a statement sequence..., token found is IN
+stmtType: IN
+stmtType: OUT
+0

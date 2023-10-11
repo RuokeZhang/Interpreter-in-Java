@@ -1,0 +1,9 @@
+start parsing stmtSeq  
+Parsing a statement sequence..., token found is ARRAY
+stmtType: ARRAY
+stmtType: ID
+x := new integer[1];
+stmtType: ID
+n := new integer[1];
+stmtType: ID
+ERROR: Variable n of type ARRAY cannot be used as INTEGER

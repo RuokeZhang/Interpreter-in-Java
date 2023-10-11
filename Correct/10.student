@@ -1,0 +1,8 @@
+start parsing stmtSeq  
+Parsing a statement sequence..., token found is ID
+stmtType: ID
+x := 1 - 1 - 1 - 1;
+stmtType: OUT
+x := 1 - 1 - 1 - 1;
+Assigning x to 0
+0

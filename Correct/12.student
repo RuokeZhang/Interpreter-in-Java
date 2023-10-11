@@ -1,0 +1,14 @@
+start parsing stmtSeq  
+Parsing a statement sequence..., token found is ID
+stmtType: ID
+x := 1;
+stmtType: ID
+y := 2;
+stmtType: OUT
+stmtType: OUT
+x := 1;
+Assigning x to 1
+y := 2;
+Assigning y to 2
+1
+2

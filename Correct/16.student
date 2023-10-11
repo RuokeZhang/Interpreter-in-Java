@@ -1,0 +1,32 @@
+start parsing stmtSeq  
+Parsing a statement sequence..., token found is INTEGER
+stmtType: INTEGER
+stmtType: INTEGER
+stmtType: INTEGER
+stmtType: ID
+x := 5;
+stmtType: ID
+y := 10;
+stmtType: ID
+z := 100;
+stmtType: WHILE
+Parsing a statement sequence..., token found is ID
+stmtType: ID
+x := x - 1;
+stmtType: WHILE
+Parsing a statement sequence..., token found is ID
+stmtType: ID
+y := y + 1;
+stmtType: WHILE
+Parsing a statement sequence..., token found is ID
+stmtType: ID
+z := z - 1;
+stmtType: OUT
+stmtType: OUT
+x := 5;
+Assigning x to 5
+y := 10;
+Assigning y to 10
+z := 100;
+Assigning z to 100
+0

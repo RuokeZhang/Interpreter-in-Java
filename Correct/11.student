@@ -1,0 +1,8 @@
+start parsing stmtSeq  
+Parsing a statement sequence..., token found is ID
+stmtType: ID
+x := 1 * 2 * 3 * 4;
+stmtType: OUT
+x := 1 * 2 * 3 * 4;
+Assigning x to 24
+24

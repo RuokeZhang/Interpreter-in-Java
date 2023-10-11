@@ -1,0 +1,9 @@
+start parsing stmtSeq  
+Parsing a statement sequence..., token found is INTEGER
+stmtType: INTEGER
+stmtType: ID
+x := 5;
+stmtType: OUT
+x := 5;
+Assigning x to 5
+0
