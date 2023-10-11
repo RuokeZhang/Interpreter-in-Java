@@ -3,9 +3,6 @@ import Parser.Procedure;
 import Parser.VariableTable;
 import Parser.Scanner;
 
-
-
-
 public class Main {
 
     public static void main(String[] args) {

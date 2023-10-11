@@ -100,7 +100,6 @@ public class Assign {
         else if (arrayId != null) {
             System.out.println(" := array " + arrayId + ";");
         }
-        // Print simple variable assignment
         else {
             System.out.print(" := ");
             valueExpr.print();
@@ -127,12 +126,10 @@ public class Assign {
             System.out.println("Print array to array assignment");
             System.out.println("Assigning "+id+" to "+arrayId);
         }
-        // Print simple variable assignment
         else {
             vTable.store(id, valueExpr.execute());
-            System.out.println("Print simple variable assignment");
             System.out.println("Assigning "+id+" to "+valueExpr.execute());
-            System.out.println("Value of "+id+" is ");
+            System.out.println("Value of "+id+" is "+vTable.getIntValue(id)+"lalal" );
         }
     }
 }
