@@ -41,9 +41,9 @@ public class Loop {
         System.out.println("    end");  // Print the ending keyword for the loop
     }
 
-    void execute(String data){
+    void execute(Scanner dataScanner){
         while(condition.execute()){
-            stmtSeq.execute(data);
+            stmtSeq.execute(dataScanner);
         }
     }
 }

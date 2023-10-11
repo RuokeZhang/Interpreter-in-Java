@@ -66,7 +66,6 @@ public class Assign {
             }
             // Handle simple variable assignment
             else {
-                vTable.checkVariableType(id, Core.INTEGER);
                 valueExpr = new Expression(vTable);
                 valueExpr.parse(s);
             }
@@ -110,26 +109,24 @@ public class Assign {
     public void execute(){
         if (indexExpr != null) {
             vTable.store(id, indexExpr.execute(), valueExpr.execute());
-            System.out.println("Print array assignment");
-            System.out.println("Assigning "+id+"["+indexExpr.execute()+"] to "+valueExpr.execute());
+            //System.out.println("Assigning "+id+"["+indexExpr.execute(vTable)+"] to "+valueExpr.execute());
         }
         // Print new integer array assignment
         else if (isNewInteger) {
             vTable.newArray(id, newIntegerExpr.execute());
-            System.out.println("Print new integer array assignment" );
-            System.out.println("Assigning "+id+" to new integer array of size "+newIntegerExpr.execute());
         }
         // Print array to array assignment
         else if (arrayId != null) {
 
             vTable.store(id, vTable.getArrValue(arrayId));
-            System.out.println("Print array to array assignment");
-            System.out.println("Assigning "+id+" to "+arrayId);
+
         }
         else {
-            vTable.store(id, valueExpr.execute());
-            System.out.println("Assigning "+id+" to "+valueExpr.execute());
-            System.out.println("Value of "+id+" is "+vTable.getIntValue(id)+"lalal" );
+            if (vTable.getVariableType(id) == Core.ARRAY) {
+                vTable.store(id, 0,valueExpr.execute());
+            }else{
+                vTable.store(id, valueExpr.execute());
+            }
         }
     }
 }

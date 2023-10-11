@@ -15,7 +15,7 @@ public class DeclSeq {
         // If the next token is still the start of another decl, we parse it
         // recursively.
         while (isStartOfDecl(s.currentToken())) {
-            Decl decl = new Decl(vTable); // Construct Decl with VariableTable
+            Decl decl = new Decl(); // Construct Decl with VariableTable
             decl.parse(s);
 
             // Assuming Decl has a method getVariableName() to get the name of the declared

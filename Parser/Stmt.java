@@ -29,7 +29,7 @@ public class Stmt {
      *
      * @param s The scanner instance to read tokens.
      */
-    void parse(Scanner s) throws IOException {
+    void parse(Scanner s, VariableTable vTable) throws IOException {
         stmtType = s.currentToken();
         // Parsing if-statement
         if (stmtType == Core.IF) {
@@ -53,7 +53,7 @@ public class Stmt {
 
             // Parsing variable declarations (either array or integer type)
         } else if (stmtType == Core.ARRAY || stmtType == Core.INTEGER) {
-            decl = new Decl(vTable); // Construct Decl with VariableTable
+            decl = new Decl();
             decl.parse(s);
 
             // Check for duplicate variable declaration
@@ -99,15 +99,15 @@ public class Stmt {
         }
     }
 
-    void execute(String data) {
+    void execute(Scanner dataScanner) {
         if (ifKeyword != null) {
-            ifKeyword.execute(data);
+            ifKeyword.execute(dataScanner);
         } else if (loop != null) {
-            loop.execute(data);
+            loop.execute(dataScanner);
         } else if (outKeyword != null) {
             outKeyword.execute();
         } else if (inKeyword != null) {
-            inKeyword.execute(data);
+            inKeyword.execute(dataScanner);
         }  else if (assign != null) {
             assign.execute();
         }

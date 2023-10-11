@@ -1,5 +1,4 @@
-stmtType: ARRAY
-stmtType: ID
-stmtType: ID
-stmtType: ID
-ERROR: Variable n of type ARRAY cannot be used as INTEGER
+20
+60
+120
+120

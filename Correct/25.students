@@ -1,0 +1,2 @@
+Added variable n to the variable table.
+ERROR: Variable n of type ARRAY cannot be used as INTEGER

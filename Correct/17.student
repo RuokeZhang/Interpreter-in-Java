@@ -1,14 +1,1 @@
-stmtType: ID
-stmtType: ID
-stmtType: ID
-stmtType: OUT
-Print simple variable assignment
-Assigning x to 5
-Value of x is 
-Print simple variable assignment
-Assigning y to 10
-Value of y is 
-Print simple variable assignment
-Assigning z to 55
-Value of z is 
 55

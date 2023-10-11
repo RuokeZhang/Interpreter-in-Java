@@ -1,4 +1,5 @@
 package Parser;
+
 import java.io.IOException;
 
 public class OutKeyword {
@@ -25,7 +26,17 @@ public class OutKeyword {
     }
 
     void execute() {
-        System.out.println(expr.execute());
+        if (expr.isIdentifier()) {
+            String name = expr.getName();
+            if (vTable.getVariableType(name) == Core.ARRAY) {
+                System.out.println(vTable.getIntValue(name, 0));
+            } else {
+                System.out.println(expr.execute());
+            }
+        } else {
+            System.out.println(expr.execute());
+        }
     }
+
 
 }

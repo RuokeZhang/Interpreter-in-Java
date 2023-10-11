@@ -4,6 +4,7 @@ import java.util.Stack;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class VariableTable {
 
     static class Value {
@@ -22,13 +23,10 @@ public class VariableTable {
 
     // Stack to maintain variable local. Each entry in the stack represents a scope
     // with variable names and their data types.
-    static HashMap<String, Value> global;
-    static Stack<HashMap<String, Value>> local;
+    HashMap<String, Value> global= new HashMap<>();;
+    Stack<HashMap<String, Value>> local = new Stack<>();;
 
-    public void initialization() {
-        global = new HashMap<>();
-        local = new Stack<>();
-    }
+
 
     /**
      * Enter a new variable scope. This is useful for handling nested code blocks.
@@ -177,7 +175,7 @@ public class VariableTable {
         }
     }
 
-    int getIntValue(String var) {
+    int getIntValue(String var)  {
         if (isGlobal(var)) {
             return global.get(var).intValue;
         } else {
@@ -205,6 +203,7 @@ public class VariableTable {
 
     int getIntValue(String var, int index) {
         if (isGlobal(var)) {
+
             return global.get(var).arrayValue[index];
         } else {
             for (Map<String, Value> scope : local) {
