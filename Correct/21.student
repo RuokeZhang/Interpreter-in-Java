@@ -1,8 +1,1 @@
-stmtType: ARRAY
-stmtType: ARRAY
-stmtType: ARRAY
-stmtType: ID
-stmtType: ID
-stmtType: ID
-stmtType: ID
-ERROR: Variable x of type ARRAY cannot be used as INTEGER
+7

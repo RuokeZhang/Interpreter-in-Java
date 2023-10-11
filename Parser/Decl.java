@@ -4,11 +4,8 @@ import java.io.IOException;
 class Decl {
     private Core declType;
     private String id;
-    private VariableTable vTable;
 
-    public Decl(VariableTable vTable) {
-        this.vTable=vTable;
-    }
+
 
     void parse(Scanner s) throws IOException {
         declType = s.currentToken();
@@ -55,7 +52,6 @@ class Decl {
             System.out.println("ERROR: Expect ';' here, found "+s.currentToken());
             System.exit(1);
         }
-
 
         s.nextToken();
     }

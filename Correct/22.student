@@ -1,4 +1,1 @@
-stmtType: ID
-stmtType: ID
-stmtType: ID
-ERROR: Variable x of type ARRAY cannot be used as INTEGER
+-10

@@ -27,10 +27,10 @@ public class Factor {
                 ParserUtils.handleExpectedToken(s, Core.RBRACE);
             } else {
 
-                if (vTable.getVariableType(id) == Core.ARRAY) {
+                /*if (vTable.getVariableType(id) == Core.ARRAY) {
                     System.out.println("ERROR: Type mismatch. Array " + id + " used as an integer.");
                     System.exit(1);
-                }
+                }*/
                 ParserUtils.lookAheadToken = s.currentToken();
                 // System.out.println("When parsing factor, store" +
                 // ParserUtils.lookAheadToken);
@@ -57,6 +57,10 @@ public class Factor {
             value = vTable.getIntValue(id);
             if (expr != null) {
                 value = vTable.getIntValue(id, expr.execute());
+            }else{
+                if(vTable.getVariableType(id)==Core.ARRAY){
+                    value=vTable.getIntValue(id,0);
+                }
             }
         } else if (hasNum) {
             value=num;
@@ -69,7 +73,6 @@ public class Factor {
     public void print() {
         if (id != null) {
             System.out.print(id);
-
             // Check if there's an associated expression, meaning the id was followed by
             // square brackets.
             if (expr != null) {
@@ -84,6 +87,12 @@ public class Factor {
             expr.print();
             System.out.print(")");
         }
+    }
+    public boolean isIdentifier(){
+        return id!=null&&expr==null;
+    }
+    public String getName(){
+        return id;
     }
 
 }

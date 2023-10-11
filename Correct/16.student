@@ -1,24 +1,6 @@
-stmtType: INTEGER
-stmtType: INTEGER
-stmtType: INTEGER
-stmtType: ID
-stmtType: ID
-stmtType: ID
-stmtType: WHILE
-stmtType: ID
-stmtType: WHILE
-stmtType: ID
-stmtType: WHILE
-stmtType: ID
-stmtType: OUT
-stmtType: OUT
-Print simple variable assignment
-Assigning x to 5
-Value of x is 
-Print simple variable assignment
-Assigning y to 10
-Value of y is 
-Print simple variable assignment
-Assigning z to 100
-Value of z is 
+4
+3
+2
+1
+0
 0

@@ -1,24 +1,16 @@
 package Parser;
 import java.io.IOException;
 
-
-
-/**
- * Represents a procedure in the language. A procedure contains declarations and statements.
- */
 public class Procedure {
-    private String procedureName;       // Name of the procedure
-    private DeclSeq declSeq = null;     // Sequence of declarations within the procedure
-    private StmtSeq stmtSeq;            // Sequence of statements within the procedure
-    private VariableTable vTable;       // Table to keep track of variables within the procedure
+    private String procedureName;
+    private DeclSeq declSeq = null;
+    private StmtSeq stmtSeq;
+    private VariableTable vTable;
+    private Scanner dataScanner;  // Add dataScanner member
 
-    /**
-     * Constructor initializes a Procedure with a VariableTable to manage variables in its scope.
-     *
-     * @param vTable The variable table.
-     */
-    public Procedure(VariableTable vTable) {
+    public Procedure(VariableTable vTable, Scanner dataScanner) {
         this.vTable = vTable;
+        this.dataScanner = dataScanner;  // Initialize dataScanner
     }
 
     /**
@@ -28,8 +20,7 @@ public class Procedure {
      * @throws IOException If there's an issue reading the input.
      */
     public void parse(Scanner scanner) throws IOException {
-        vTable.initialization();
-        vTable.enterScope(); // Entering a new scope for this procedure
+
 
         // Expecting a PROCEDURE token
         ParserUtils.handleExpectedToken(scanner, Core.PROCEDURE);
@@ -53,6 +44,8 @@ public class Procedure {
         // Expecting the BEGIN token to start parsing statements
         ParserUtils.handleExpectedToken(scanner, Core.BEGIN);
 
+        vTable.enterScope(); // Entering a new scope for this procedure
+
         stmtSeq = new StmtSeq(vTable); // Pass the variable table to StmtSeq
         stmtSeq.parse(scanner);
 
@@ -65,7 +58,6 @@ public class Procedure {
             System.exit(0);
         }
 
-        vTable.leaveScope(); // Exiting the scope for this procedure
     }
 
     /**
@@ -85,7 +77,7 @@ public class Procedure {
         System.out.println("end");
     }
 
-    public void execute(String data){
-        stmtSeq.execute(data);
+    public void execute() {
+        stmtSeq.execute(dataScanner);
     }
 }

@@ -75,4 +75,10 @@ public class Expression {
         }
         return value;
     }
+    public boolean isIdentifier(){
+        return operator==null&&term.isIdentifier();
+    }
+    public String getName(){
+        return term.getName();
+    }
 }

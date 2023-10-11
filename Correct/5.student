@@ -1,7 +1,1 @@
-stmtType: INTEGER
-stmtType: ID
-stmtType: OUT
-Print simple variable assignment
-Assigning x to 5
-Value of x is 
-0
+5

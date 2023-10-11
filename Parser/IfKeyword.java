@@ -67,11 +67,11 @@ public class IfKeyword {
         System.out.println( "end");
     }
 
-    void execute(String data){
+    void execute(Scanner dataScanner){
         if(condition.execute()){
-            thenStmtSeq.execute(data);
+            thenStmtSeq.execute(dataScanner);
         }else if(elseStmtSeq != null){
-            elseStmtSeq.execute(data);
+            elseStmtSeq.execute(dataScanner);
         }
     }
 

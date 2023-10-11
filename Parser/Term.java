@@ -1,4 +1,5 @@
 package Parser;
+
 import java.io.IOException;
 
 public class Term {
@@ -55,7 +56,8 @@ public class Term {
             }
         }
     }
-    int execute(){
+
+    int execute() {
         int value = factor.execute();
         if (operator != null) {
             if (operator == Core.MULTIPLY) {
@@ -66,5 +68,12 @@ public class Term {
         }
         return value;
     }
-}
 
+    public boolean isIdentifier() {
+        return operator == null && factor.isIdentifier();
+    }
+
+    public String getName() {
+        return factor.getName();
+    }
+}

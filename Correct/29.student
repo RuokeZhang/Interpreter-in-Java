@@ -1,49 +1,10 @@
-stmtType: ID
-stmtType: WHILE
-stmtType: INTEGER
-stmtType: IN
-stmtType: OUT
-stmtType: ID
-Print simple variable assignment
-Assigning x to 0
-Value of x is 
 0
-Print simple variable assignment
-Assigning x to 2
-Value of x is 
-0
-Print simple variable assignment
-Assigning x to 3
-Value of x is 
-0
-Print simple variable assignment
-Assigning x to 4
-Value of x is 
-0
-Print simple variable assignment
-Assigning x to 5
-Value of x is 
-0
-Print simple variable assignment
-Assigning x to 6
-Value of x is 
-0
-Print simple variable assignment
-Assigning x to 7
-Value of x is 
-0
-Print simple variable assignment
-Assigning x to 8
-Value of x is 
-0
-Print simple variable assignment
-Assigning x to 9
-Value of x is 
-0
-Print simple variable assignment
-Assigning x to 10
-Value of x is 
-0
-Print simple variable assignment
-Assigning x to 11
-Value of x is 
+1
+2
+3
+4
+5
+6
+7
+8
+9

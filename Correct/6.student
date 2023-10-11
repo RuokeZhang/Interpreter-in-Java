@@ -1,8 +1,1 @@
-stmtType: ID
-stmtType: ID
-stmtType: OUT
-Print new integer array assignment
-Assigning x to new integer array of size 1
-Print array assignment
-Assigning x[0] to 5
 5
