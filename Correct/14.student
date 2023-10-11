@@ -1,15 +1,12 @@
-start parsing stmtSeq  
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-x := 10;
 stmtType: ID
-y := 5;
 stmtType: IF
-Parsing a statement sequence..., token found is OUT
 stmtType: OUT
 stmtType: OUT
-x := 10;
+Print simple variable assignment
 Assigning x to 10
-y := 5;
+Value of x is 
+Print simple variable assignment
 Assigning y to 5
+Value of y is 
 5

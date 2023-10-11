@@ -1,8 +1,6 @@
-start parsing stmtSeq  
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-x := 1 * 2 * 3 * 4;
 stmtType: OUT
-x := 1 * 2 * 3 * 4;
+Print simple variable assignment
 Assigning x to 24
+Value of x is 
 24

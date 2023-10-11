@@ -54,7 +54,6 @@ public class Procedure {
         ParserUtils.handleExpectedToken(scanner, Core.BEGIN);
 
         stmtSeq = new StmtSeq(vTable); // Pass the variable table to StmtSeq
-        System.out.println("start parsing stmtSeq  ");
         stmtSeq.parse(scanner);
 
         // Finish up by expecting the END token for the procedure

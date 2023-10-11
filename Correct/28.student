@@ -1,34 +1,24 @@
-start parsing stmtSeq  
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-x := new integer[4];
 stmtType: ID
-x[0] := 1;
 stmtType: IF
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-x[1] := 2;
 stmtType: IF
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-x[2] := 3;
 stmtType: IF
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-x[3] := 4;
 stmtType: OUT
 stmtType: OUT
 stmtType: OUT
 stmtType: OUT
-x := new integer[4];
+Print new integer array assignment
 Assigning x to new integer array of size 4
-x[0] := 1;
+Print array assignment
 Assigning x[0] to 1
-x[1] := 2;
+Print array assignment
 Assigning x[1] to 2
-x[2] := 3;
+Print array assignment
 Assigning x[2] to 3
-x[3] := 4;
+Print array assignment
 Assigning x[3] to 4
 4
 3

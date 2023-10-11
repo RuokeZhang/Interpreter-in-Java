@@ -1,424 +1,616 @@
-start parsing stmtSeq  
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-x := 1;
 stmtType: ID
-y := 10;
 stmtType: ID
-z := 100;
 stmtType: WHILE
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-x := z - x;
 stmtType: WHILE
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-z := z - 1;
 stmtType: ID
-x := y;
 stmtType: OUT
-x := 1;
+Print simple variable assignment
 Assigning x to 1
-y := 10;
+Value of x is 
+Print simple variable assignment
 Assigning y to 10
-z := 100;
+Value of y is 
+Print simple variable assignment
 Assigning z to 100
-x := z - x;
+Value of z is 
+Print simple variable assignment
 Assigning x to 1
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 98
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 97
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 96
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 95
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 94
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 93
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 92
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 91
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 90
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 89
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 88
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 87
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 86
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 85
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 84
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 83
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 82
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 81
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 80
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 79
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 78
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 77
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 76
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 75
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 74
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 73
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 72
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 71
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 70
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 69
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 68
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 67
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 66
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 65
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 64
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 63
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 62
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 61
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 60
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 59
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 58
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 57
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 56
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 55
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 54
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 53
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 52
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 51
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 50
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 49
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 48
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 47
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 46
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 45
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 44
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 43
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 42
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 41
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 40
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 39
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 38
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 37
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 36
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 35
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 34
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 33
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 32
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 31
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 30
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 29
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 28
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 27
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 26
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 25
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 24
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 23
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 22
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 21
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 20
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 19
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 18
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 17
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 16
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 15
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 14
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 13
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 12
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 11
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 10
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 9
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 8
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 7
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 6
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 5
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 4
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 3
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 2
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 1
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
-z := z - 1;
+Value of x is 
+Print simple variable assignment
 Assigning z to 0
-x := y;
+Value of z is 
+Print simple variable assignment
 Assigning x to 10
+Value of x is 
 10

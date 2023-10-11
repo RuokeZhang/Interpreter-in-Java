@@ -1,8 +1,4 @@
-start parsing stmtSeq  
-Parsing a statement sequence..., token found is IF
 stmtType: IF
-Parsing a statement sequence..., token found is OUT
 stmtType: OUT
-Parsing a statement sequence..., token found is OUT
 stmtType: OUT
 3

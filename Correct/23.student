@@ -1,29 +1,24 @@
-start parsing stmtSeq  
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-x := 5;
 stmtType: ID
-y := 10;
 stmtType: IF
-Parsing a statement sequence..., token found is WHILE
 stmtType: WHILE
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-x := x - 1;
-Parsing a statement sequence..., token found is WHILE
 stmtType: WHILE
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-y := y + 2;
 stmtType: OUT
-x := 5;
+Print simple variable assignment
 Assigning x to 5
-y := 10;
+Value of x is 
+Print simple variable assignment
 Assigning y to 10
-y := y + 2;
+Value of y is 
+Print simple variable assignment
 Assigning y to 14
-y := y + 2;
+Value of y is 
+Print simple variable assignment
 Assigning y to 16
-y := y + 2;
+Value of y is 
+Print simple variable assignment
 Assigning y to 18
+Value of y is 
 16

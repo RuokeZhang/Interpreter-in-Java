@@ -1,12 +1,8 @@
-start parsing stmtSeq  
-Parsing a statement sequence..., token found is ID
 stmtType: ID
-x := new integer[1];
 stmtType: ID
-x[0] := 5;
 stmtType: OUT
-x := new integer[1];
+Print new integer array assignment
 Assigning x to new integer array of size 1
-x[0] := 5;
+Print array assignment
 Assigning x[0] to 5
 5
