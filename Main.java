@@ -1,7 +1,5 @@
 import java.io.IOException;
-import Parser.Procedure;
-import Parser.VariableTable;
-import Parser.Scanner;
+
 
 public class Main {
 

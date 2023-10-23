@@ -1,4 +1,0 @@
-Added variable x to the variable table.
-Added variable y to the variable table.
-Added variable z to the variable table.
-ERROR: Variable x of type ARRAY cannot be used as INTEGER
