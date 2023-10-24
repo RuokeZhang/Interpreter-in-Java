@@ -78,7 +78,17 @@ public class ParserUtils {
                 token == Core.WHILE ||
                 token == Core.OUT ||
                 token == Core.IN ||
-                token == Core.INTEGER || // Assuming INT is a starting token for decl
-                token == Core.ARRAY; // Assuming BOOL is another starting token for decl
+                token == Core.INTEGER ||
+                token == Core.ARRAY ||
+                token == Core.BEGIN;// Assuming BOOL is another starting token for decl
+
+    }
+
+    public static boolean isStartOfDecl(Core token) {
+        return token == Core.INTEGER || token == Core.ARRAY;
+    }
+
+    public static boolean isStartOfFunction(Core token) {
+        return token == Core.PROCEDURE;
     }
 }

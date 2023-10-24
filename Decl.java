@@ -5,8 +5,11 @@ class Decl {
     private Core declType;
     private String id;
 
+    private VariableTable vTable;
 
-
+    public Decl(VariableTable vTable) {
+        this.vTable = vTable;
+    }
     void parse(Scanner s) throws IOException {
         declType = s.currentToken();
         switch (declType) {
@@ -46,7 +49,6 @@ class Decl {
         }
         id = s.getId();
 
-
         s.nextToken();
         if (s.currentToken() != Core.SEMICOLON) {
             System.out.println("ERROR: Expect ';' here, found "+s.currentToken());
@@ -72,6 +74,13 @@ class Decl {
         return declType;
     }
 
+    void execute() {
+        if (declType == Core.INTEGER) {
+            vTable.addGlobalVariable(id, declType);
+        } else if (declType == Core.ARRAY) {
+            vTable.addGlobalVariable(id, declType);
+        }
+    }
 
 
 

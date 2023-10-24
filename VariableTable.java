@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Stack;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,34 +10,46 @@ public class VariableTable {
         Core type;
         int intValue;
         int[] arrayValue;
-
         public Value(Core dataType, int intValue, int[] arrValue) {
-
             this.type = dataType;
             this.intValue = intValue;
             this.arrayValue = arrValue;
         }
-
     }
 
     // Stack to maintain variable local. Each entry in the stack represents a scope
     // with variable names and their data types.
     HashMap<String, Value> global= new HashMap<>();;
-    Stack<HashMap<String, Value>> local = new Stack<>();;
+    HashMap<String, Function> functions = new HashMap<>();;
 
 
+    Stack<Stack<HashMap<String, Value>>> frames = new Stack<>();
+
+
+    public void enterScope() {
+        // Create a new frame when entering a function
+        Stack<HashMap<String, Value>> newFrame = new Stack<>();
+        newFrame.push(new HashMap<>());
+        // Push the new function frame to the stack
+        frames.push(newFrame);
+    }
 
     /**
      * Enter a new variable scope. This is useful for handling nested code blocks.
      */
-    public void enterScope() {
-        local.push(new HashMap<>());
+    public void enterLocalScope() {
+        frames.peek().push(new HashMap<>());
     }
 
+    public void leaveScope() {
+        // Pop the current frame
+        frames.pop();
+    }
     /**
      * Leave the current variable scope, typically when exiting a code block.
      */
-    public void leaveScope() {
+    public void leaveLocalScope() {
+        Stack<HashMap<String, Value>> local = frames.peek();
         local.pop();
     }
 
@@ -47,10 +60,18 @@ public class VariableTable {
      * @param dataType Data type of the variable.
      */
     public void addLocalVariable(String var, Core dataType) {
-        local.peek().put(var, new Value(dataType, 0, null));
+        if(frames.peek().peek().containsKey(var)){
+            System.out.println("ERROR: Variable "+var+" already declared in this scope");
+            System.exit(1);
+        }
+        frames.peek().peek().put(var, new Value(dataType, 0, null));
     }
 
     public void addGlobalVariable(String var, Core dataType) {
+        if(global.containsKey(var)){
+            System.out.println("ERROR: Variable "+var+" already declared in this scope");
+            System.exit(1);
+        }
         global.put(var, new Value(dataType, 0, null));
     }
 
@@ -64,12 +85,35 @@ public class VariableTable {
         if (global.containsKey(var)) {
             return true;
         }
+        Stack<HashMap<String, Value>> local = frames.peek();
         for (Map<String, Value> scope : local) {
             if (scope.containsKey(var)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Add a function to the global scope.
+     *
+     * @param function Function to be added.
+     */
+    public void addFunction(Function function) {
+        if(functionExists(function.getFunctionName())){
+            System.out.println("ERROR: Function "+function.getFunctionName()+" already declared in this scope");
+            System.exit(1);
+        }
+        functions.put(function.getFunctionName(), function);
+    }
+    /**
+     * Check if a function is declared in the global scope.
+     *
+     * @param functionName Function name to be checked.
+     * @return true if function exists, false otherwise.
+     */
+    public boolean functionExists(String functionName){
+        return functions.containsKey(functionName);
     }
 
     /**
@@ -94,6 +138,7 @@ public class VariableTable {
         if (isGlobal(var)) {
             return global.get(var).type;
         } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
             for (Map<String, Value> scope : local) {
                 if (scope.containsKey(var)) {
                     return scope.get(var).type;
@@ -128,6 +173,7 @@ public class VariableTable {
         if (isGlobal(var)) {
             global.get(var).intValue = value;
         } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
             for (Map<String, Value> scope : local) {
                 if (scope.containsKey(var)) {
                     scope.get(var).intValue = value;
@@ -148,6 +194,7 @@ public class VariableTable {
             }
             global.get(var).arrayValue[index] = value;
         } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
             for (Map<String, Value> scope : local) {
                 if (scope.containsKey(var)) {
                     if(scope.get(var).arrayValue==null){
@@ -169,6 +216,7 @@ public class VariableTable {
         if (isGlobal(var)) {
             global.get(var).arrayValue = value;
         } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
             for (Map<String, Value> scope : local) {
                 if (scope.containsKey(var)) {
                     scope.get(var).arrayValue = value;
@@ -181,6 +229,7 @@ public class VariableTable {
         if (isGlobal(var)) {
             global.get(var).arrayValue = new int[size];
         } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
             for (Map<String, Value> scope : local) {
                 if (scope.containsKey(var)) {
                     scope.get(var).arrayValue = new int[size];
@@ -193,6 +242,7 @@ public class VariableTable {
         if (isGlobal(var)) {
             return global.get(var).intValue;
         } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
             for (Map<String, Value> scope : local) {
                 if (scope.containsKey(var)) {
                     return scope.get(var).intValue;
@@ -206,6 +256,7 @@ public class VariableTable {
         if (isGlobal(var)) {
             return global.get(var).arrayValue;
         } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
             for (Map<String, Value> scope : local) {
                 if (scope.containsKey(var)) {
                     return scope.get(var).arrayValue;
@@ -220,6 +271,7 @@ public class VariableTable {
 
             return global.get(var).arrayValue[index];
         } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
             for (Map<String, Value> scope : local) {
                 if (scope.containsKey(var)) {
                     return scope.get(var).arrayValue[index];
@@ -227,6 +279,10 @@ public class VariableTable {
             }
         }
         return 0;
+    }
+
+    Function getFunctionByName(String functionName){
+        return functions.get(functionName);
     }
 
 }

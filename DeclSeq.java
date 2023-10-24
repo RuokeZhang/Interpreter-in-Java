@@ -1,45 +1,59 @@
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class DeclSeq {
     private List<Decl> declSeq = new ArrayList<>();
+    private List<Function> functionSeq = new ArrayList<>();
     private VariableTable vTable;
+    private List<String> order = new ArrayList<>();
 
     public DeclSeq(VariableTable vTable) {
         this.vTable = vTable;
     }
 
-    void parse(Scanner s) throws IOException {
-        // If the next token is still the start of another decl, we parse it
-        // recursively.
-        while (isStartOfDecl(s.currentToken())) {
-            Decl decl = new Decl(); // Construct Decl with VariableTable
-            decl.parse(s);
+    /**
+     * Parses the declaration sequence from the scanner input.
+     *
+     * @param s The scanner object.
+     * @throws IOException If there's an issue reading the input.
+     */
+    final void parse(Scanner s) throws IOException {
 
-            // Assuming Decl has a method getVariableName() to get the name of the declared
-            // variable
-            String variableName = decl.getVariableName();
-            if (vTable.variableExists(variableName)) {
-                System.out.println("ERROR: duplicate decl for variable: " + variableName);
-                System.exit(1);
-            } else {
+        while (ParserUtils.isStartOfDecl(s.currentToken()) || ParserUtils.isStartOfFunction(s.currentToken())) {
+            if (ParserUtils.isStartOfDecl(s.currentToken())) {
+                Decl decl = new Decl(vTable); // Construct Decl with VariableTable
+                decl.parse(s);
+                String variableName = decl.getVariableName();
                 declSeq.add(decl);
-                vTable.addGlobalVariable(variableName, decl.getVariableType());
+            } else if (ParserUtils.isStartOfFunction(s.currentToken())) {
+                Function function = new Function(vTable, s);
+                function.parse(s);
+                String functionName = function.getFunctionName();
+                functionSeq.add(function);
             }
         }
     }
 
-    private boolean isStartOfDecl(Core token) {
-        return token == Core.INTEGER || token == Core.ARRAY;
-    }
-
     public void print() {
-        for (Decl d : declSeq) {
-            d.print();
+        for (Decl decl : declSeq) {
+            decl.print();
+        }
+        for (Function function : functionSeq) {
+            function.print();
         }
     }
 
+    void execute() {
+        for (Decl decl : declSeq) {
+            decl.execute();
+        }
+        for (Function function : functionSeq) {
+            vTable.addFunction(function);
+        }
+    }
 
 }

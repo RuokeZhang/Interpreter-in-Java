@@ -1,10 +1,11 @@
-procedure e01 is
-	integer x;
-	integer	y;
-begin
-	x := 100;
-	while 0<x do
-		in(y);
-		x := x-1;
+procedure err1 is
+	procedure A( r ) is
+		integer x;
+		x := r[0];
 	end
+	array x;
+begin
+	x := new integer[1];
+	x[0] := 5;
+	begin B(x);
 end

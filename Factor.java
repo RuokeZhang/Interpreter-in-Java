@@ -16,11 +16,11 @@ public class Factor {
         Core token = s.currentToken();
         if (token == Core.ID) {
             id = s.getId();
-            vTable.checkVariableDeclared(id);
+            //vTable.checkVariableDeclared(id);
             s.nextToken();
             // Check for '[' followed by an expression and then ']'
             if (s.currentToken() == Core.LBRACE) {
-                vTable.checkVariableType(id, Core.ARRAY);
+                //vTable.checkVariableType(id, Core.ARRAY);
                 s.nextToken();
                 expr = new Expression(vTable);
                 expr.parse(s);

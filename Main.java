@@ -17,6 +17,7 @@ public class Main {
 
         try {
             procedure.parse(scanner);
+            //procedure.print();
             procedure.execute();
         } catch (IOException e) {
             System.out.println("IO error while reading " + args[0]);

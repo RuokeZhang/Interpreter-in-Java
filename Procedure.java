@@ -27,7 +27,7 @@ public class Procedure {
 
         // Validating the procedure name
         if (scanner.currentToken() != Core.ID) {
-            System.out.println("ERROR: There should be no token after the 'end' token");
+            System.out.println("ERROR: Expected an ID token for the procedure name");
             System.exit(0);
         }
         procedureName = scanner.getId();
@@ -36,15 +36,13 @@ public class Procedure {
         ParserUtils.handleExpectedToken(scanner, Core.IS);
 
         // Parsing declarations if present
-        if (scanner.currentToken() == Core.ARRAY || scanner.currentToken() == Core.INTEGER) {
+        if (ParserUtils.isStartOfDecl(scanner.currentToken())||ParserUtils.isStartOfFunction(scanner.currentToken())) {
             declSeq = new DeclSeq(vTable); // Pass the variable table to DeclSeq
             declSeq.parse(scanner);
         }
 
         // Expecting the BEGIN token to start parsing statements
         ParserUtils.handleExpectedToken(scanner, Core.BEGIN);
-
-        vTable.enterScope(); // Entering a new scope for this procedure
 
         stmtSeq = new StmtSeq(vTable); // Pass the variable table to StmtSeq
         stmtSeq.parse(scanner);
@@ -77,7 +75,14 @@ public class Procedure {
         System.out.println("end");
     }
 
-    public void execute() {
+    void execute() {
+        if (declSeq != null) {
+            declSeq.execute();
+        }
+        vTable.enterScope();
+        vTable.enterLocalScope();
         stmtSeq.execute(dataScanner);
+        vTable.leaveLocalScope();
+        vTable.leaveScope();
     }
 }

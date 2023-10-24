@@ -1,9 +1,16 @@
 procedure c9 is
-	array y;
-begin
 	array x;
+	procedure A ( r ) is
+		integer a;
+		if r[0] < 9 then
+			in(a);
+			r[0] := a;
+			begin A(r); 
+		end
+	end
+begin
 	x := new integer[1];
-	y := array x;
-	x[0] := 5;
-	out(y[0]);
+	in(x);
+	begin A(x);
+	out(x);
 end

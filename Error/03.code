@@ -1,6 +1,15 @@
-procedure e03 is
-	array x;
+procedure err3 is
+	procedure A( r ) is
+		integer x;
+		x := r[0];
+	end
+	procedure A( r ) is
+		integer x;
+		x := r[0];
+	end
+	array a;
 begin
-	x := new integer[5];
-	x[5] := 1;
+	a := new integer[1];
+	a[0] := 5;
+	begin A(a);
 end
