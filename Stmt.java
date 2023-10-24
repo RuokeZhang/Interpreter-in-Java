@@ -10,6 +10,7 @@ public class Stmt {
     private InKeyword inKeyword;
     private Decl decl;
     private Assign assign;
+    private Call call;
 
     // Variable table to manage the variable scope and declaration
     private VariableTable vTable;
@@ -51,25 +52,19 @@ public class Stmt {
             inKeyword.parse(s);
 
             // Parsing variable declarations (either array or integer type)
-        } else if (stmtType == Core.ARRAY || stmtType == Core.INTEGER) {
-            decl = new Decl();
+        } else if(stmtType==Core.BEGIN){
+            call=new Call(vTable);
+            call.parse(s);
+        }else if (stmtType == Core.ARRAY || stmtType == Core.INTEGER) {
+            decl = new Decl(vTable);
             decl.parse(s);
-
-            // Check for duplicate variable declaration
-            String varName = decl.getVariableName();
-            if (vTable.variableExists(varName)) {
-                System.out.println("ERROR: Variable " + varName + " is already declared in this scope!");
-                System.exit(1);
-            } else {
-                vTable.addLocalVariable(varName, decl.getVariableType());
-            }
 
             // Parsing assignment statements
         } else if (stmtType == Core.ID) {
             assign = new Assign(vTable); // Construct Assign with VariableTable
             assign.parse(s);
-
-
+        }else if(stmtType == Core.BEGIN){
+            call.parse(s);
             // Error handling for unexpected statement types
         } else {
             System.out.println("ERROR: Statement Type Expected, but found " + stmtType);
@@ -79,8 +74,6 @@ public class Stmt {
 
     /**
      * Prints the parsed statement based on its type with proper indentation.
-     *
-     *
      */
     void print() {
         if (ifKeyword != null) {
@@ -95,6 +88,8 @@ public class Stmt {
             decl.print();
         } else if (assign != null) {
             assign.print();
+        }else if(call!=null){
+            call.print();
         }
     }
 
@@ -109,6 +104,10 @@ public class Stmt {
             inKeyword.execute(dataScanner);
         }  else if (assign != null) {
             assign.execute();
+        }else if(call!=null){
+            call.execute(dataScanner);
+        }else if(decl!=null){
+            decl.execute();
         }
     }
 }

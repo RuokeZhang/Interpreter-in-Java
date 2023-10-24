@@ -1,5 +1,11 @@
-procedure e02 is
-	array x;
+procedure err2 is
+	procedure A( r, r ) is
+		integer x;
+		x := r[0];
+	end
 begin
-	x := 1;
+	array x;
+	x := new integer[1];
+	x[0] := 5;
+	begin A(x, x);
 end

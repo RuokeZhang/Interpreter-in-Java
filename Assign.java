@@ -23,11 +23,11 @@ public class Assign {
         // Parse and validate the ID
         ParserUtils.handleExpectedToken(s, Core.ID);
         id = s.getId();
-        vTable.checkVariableDeclared(id);
+        //vTable.checkVariableDeclared(id);
 
         // Handle array assignments
         if (s.currentToken() == Core.LBRACE) {
-            vTable.checkVariableType(id, Core.ARRAY);
+            //vTable.checkVariableType(id, Core.ARRAY);
             s.nextToken();
             indexExpr = new Expression(vTable);
             indexExpr.parse(s);
@@ -44,7 +44,7 @@ public class Assign {
 
             // Handle new integer array assignment
             if (s.currentToken() == Core.NEW) {
-                vTable.checkVariableType(id, Core.ARRAY);
+                //vTable.checkVariableType(id, Core.ARRAY);
                 s.nextToken();
 
                 ParserUtils.handleExpectedToken(s, Core.INTEGER);
@@ -57,12 +57,12 @@ public class Assign {
             }
             // Handle array to array assignment
             else if (s.currentToken() == Core.ARRAY) {
-                vTable.checkVariableType(id, Core.ARRAY);
+                //vTable.checkVariableType(id, Core.ARRAY);
                 s.nextToken();
 
                 ParserUtils.handleExpectedToken(s, Core.ID);
                 arrayId = s.getId();
-                vTable.checkVariableType(arrayId, Core.ARRAY);
+                //vTable.checkVariableType(arrayId, Core.ARRAY);
             }
             // Handle simple variable assignment
             else {

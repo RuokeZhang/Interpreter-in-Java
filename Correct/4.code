@@ -1,9 +1,10 @@
 procedure c4 is
+	procedure A ( r ) is 
+		r := 0; 
+	end 
+	array x;
 begin
-	integer x;
-	in(x);
-	while not x = 9 do
-		out(10);
-		in(x);
-	end
+	x := new integer[1];
+	x[0] := 1;
+	out(4);
 end
