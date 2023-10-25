@@ -52,7 +52,6 @@ public class Function {
         stmtSeq = new StmtSeq(vTable);
         stmtSeq.parse(scanner);
 
-
         //Expecting an END token
         ParserUtils.handleExpectedToken(scanner, Core.END);
     }

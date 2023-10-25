@@ -3,15 +3,22 @@ import java.io.IOException;
 
 // This class represents the Assignment construct in the grammar.
 public class Assign {
+    // type is
+    // 0 if id := <expr> assignment
+    // 1 if id[<expr>] := <expr> assignment
+    // 2 if "new" assignment
+    // 3 if "array" assignment
 
     // Variables for storing parsed data
     private String id;
     private Expression indexExpr;
     private Expression valueExpr;
-    private String arrayId;
+    private String secId;
     private boolean isNewInteger = false;
     private Expression newIntegerExpr;
     private VariableTable vTable;
+
+    private int type;
 
     // Constructor: Initializes an assignment with the given variable table
     public Assign(VariableTable vTable) {
@@ -19,15 +26,14 @@ public class Assign {
     }
 
     void parse(Scanner s) throws IOException {
-
+        type = 0;
         // Parse and validate the ID
         ParserUtils.handleExpectedToken(s, Core.ID);
         id = s.getId();
-        //vTable.checkVariableDeclared(id);
 
         // Handle array assignments
         if (s.currentToken() == Core.LBRACE) {
-            //vTable.checkVariableType(id, Core.ARRAY);
+            type = 1;
             s.nextToken();
             indexExpr = new Expression(vTable);
             indexExpr.parse(s);
@@ -36,17 +42,13 @@ public class Assign {
             ParserUtils.handleExpectedToken(s, Core.ASSIGN);
             valueExpr = new Expression(vTable);
             valueExpr.parse(s);
-            ParserUtils.handleExpectedToken(s, Core.SEMICOLON);
-        }
-        // Handle variable assignments
-        else if (s.currentToken() == Core.ASSIGN) {
-            s.nextToken();
 
+        } else {
+            ParserUtils.handleExpectedToken(s, Core.ASSIGN);
             // Handle new integer array assignment
             if (s.currentToken() == Core.NEW) {
-                //vTable.checkVariableType(id, Core.ARRAY);
                 s.nextToken();
-
+                type = 2;
                 ParserUtils.handleExpectedToken(s, Core.INTEGER);
                 ParserUtils.handleExpectedToken(s, Core.LBRACE);
 
@@ -57,24 +59,19 @@ public class Assign {
             }
             // Handle array to array assignment
             else if (s.currentToken() == Core.ARRAY) {
-                //vTable.checkVariableType(id, Core.ARRAY);
+                type = 3;
                 s.nextToken();
-
                 ParserUtils.handleExpectedToken(s, Core.ID);
-                arrayId = s.getId();
-                //vTable.checkVariableType(arrayId, Core.ARRAY);
+                secId = s.getId();
             }
             // Handle simple variable assignment
             else {
                 valueExpr = new Expression(vTable);
                 valueExpr.parse(s);
             }
-
-            ParserUtils.handleExpectedToken(s, Core.SEMICOLON);
-        } else {
-            System.out.println("ERROR: Expecting ':=' token or '[' token, found " + s.currentToken());
-            System.exit(0);
         }
+
+        ParserUtils.handleExpectedToken(s, Core.SEMICOLON);
     }
 
     // Print the parsed assignment in a formatted manner
@@ -96,37 +93,35 @@ public class Assign {
             System.out.println("];");
         }
         // Print array to array assignment
-        else if (arrayId != null) {
-            System.out.println(" := array " + arrayId + ";");
-        }
-        else {
+        else if (secId != null) {
+            System.out.println(" := array " + secId + ";");
+        } else {
             System.out.print(" := ");
             valueExpr.print();
             System.out.println(";");
         }
     }
 
-    public void execute(){
-        if (indexExpr != null) {
-            vTable.store(id, indexExpr.execute(), valueExpr.execute());
-            //System.out.println("Assigning "+id+"["+indexExpr.execute(vTable)+"] to "+valueExpr.execute());
-        }
-        // Print new integer array assignment
-        else if (isNewInteger) {
-            vTable.newArray(id, newIntegerExpr.execute());
-        }
-        // Print array to array assignment
-        else if (arrayId != null) {
-
-            vTable.store(id, vTable.getArrValue(arrayId));
-
-        }
-        else {
+    public void execute() {
+        vTable.checkVariableDeclared(id);
+        if (type == 0) {
             if (vTable.getVariableType(id) == Core.ARRAY) {
-                vTable.store(id, 0,valueExpr.execute());
-            }else{
+                vTable.store(id, 0, valueExpr.execute());
+            } else {
                 vTable.store(id, valueExpr.execute());
             }
+        } else if (type == 1) {
+            vTable.checkVariableType(id, Core.ARRAY);
+            vTable.store(id, indexExpr.execute(), valueExpr.execute());
+        } else if (type == 2) {
+            vTable.checkVariableType(id, Core.ARRAY);
+            vTable.newArray(id, newIntegerExpr.execute());
+        } else if (type == 3) {
+            vTable.checkVariableType(id, Core.ARRAY);
+            vTable.checkVariableType(secId, Core.ARRAY);
+            vTable.checkVariableDeclared(secId);
+            vTable.store(id, vTable.getArrValue(secId));
         }
+
     }
 }

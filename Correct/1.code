@@ -1,9 +1,9 @@
 procedure c1 is
-	procedure A ( r ) is 
+	procedure A ( r ) is
 		integer a;
-		if r < 9 then 
-			in(r); 
-			begin A(r); 
+		if r < 9 then
+			in(r);
+			begin A(r);
 		end
 	end
 	array x;

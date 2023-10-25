@@ -10,7 +10,7 @@ public class Call {
     private VariableTable vTable;
 
 
-    public Call(VariableTable vTable){
+    public Call(VariableTable vTable) {
         this.vTable = vTable;
     }
 
@@ -23,7 +23,7 @@ public class Call {
             System.out.println("ERROR: Expected an ID token for the parameter name");
             System.exit(0);
         }
-        functionName=scanner.getId();
+        functionName = scanner.getId();
         scanner.nextToken();
 
         //Expecting a LPAREN token
@@ -45,27 +45,28 @@ public class Call {
         parameters.print();
         System.out.println(");");
     }
+
     void execute(Scanner dataScanner) {
-        Function function=vTable.getFunctionByName(functionName);
+        Function function = vTable.getFunctionByName(functionName);
+        if(!vTable.functionExists(functionName)){
+            System.out.println("ERROR: Function "+functionName+" not declared in this scope");
+            System.exit(1);
+        }
         List<int[]> actualParameters = getParametersValues();
         vTable.enterScope();
         function.execute(dataScanner, actualParameters);
         vTable.leaveScope();
     }
+
     List<int[]> getParametersValues() {
         List<int[]> tempValues = new ArrayList<>();
-    //System.out.println("parameters.getParameters(): " + parameters.getParameters());
+        //System.out.println("parameters.getParameters(): " + parameters.getParameters());
         for (String actualParamName : parameters.getParameters()) {
-            //System.out.println("actualParamName: " + actualParamName);
-
             int[] value = vTable.getArrValue(actualParamName);
-            //System.out.println("value: " + value[0]);
             tempValues.add(value);
         }
         return tempValues;
     }
-
-
 
 
 }

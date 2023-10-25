@@ -16,24 +16,16 @@ public class Factor {
         Core token = s.currentToken();
         if (token == Core.ID) {
             id = s.getId();
-            //vTable.checkVariableDeclared(id);
             s.nextToken();
             // Check for '[' followed by an expression and then ']'
             if (s.currentToken() == Core.LBRACE) {
-                //vTable.checkVariableType(id, Core.ARRAY);
                 s.nextToken();
                 expr = new Expression(vTable);
                 expr.parse(s);
                 ParserUtils.handleExpectedToken(s, Core.RBRACE);
             } else {
 
-                /*if (vTable.getVariableType(id) == Core.ARRAY) {
-                    System.out.println("ERROR: Type mismatch. Array " + id + " used as an integer.");
-                    System.exit(1);
-                }*/
                 ParserUtils.lookAheadToken = s.currentToken();
-                // System.out.println("When parsing factor, store" +
-                // ParserUtils.lookAheadToken);
                 s.nextToken();
             }
         } else if (token == Core.CONST) {
@@ -54,8 +46,10 @@ public class Factor {
     public int execute() {
         int value;
         if (id != null) {
+            vTable.checkVariableDeclared(id);
             value = vTable.getIntValue(id);
             if (expr != null) {
+                vTable.checkVariableType(id, Core.ARRAY);
                 value = vTable.getIntValue(id, expr.execute());
             }else{
                 if(vTable.getVariableType(id)==Core.ARRAY){

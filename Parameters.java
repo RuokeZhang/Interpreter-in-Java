@@ -1,10 +1,12 @@
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.io.IOException;
 
 public class Parameters {
     private List<String> parameters = new ArrayList<>();
+    private HashSet<String> parameterSet = new HashSet<>();
 
     private VariableTable vTable;
 
@@ -20,6 +22,11 @@ public class Parameters {
             System.exit(0);
         }
         parameters.add(scanner.getId());
+        if(parameterSet.contains(scanner.getId())){
+            System.out.println("ERROR: Duplicate formal parameter name");
+            System.exit(0);
+        }
+        parameterSet.add(scanner.getId());
         scanner.nextToken();
 
         if(scanner.currentToken()==Core.COMMA){
