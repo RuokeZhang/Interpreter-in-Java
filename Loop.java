@@ -43,7 +43,9 @@ public class Loop {
 
     void execute(Scanner dataScanner){
         while(condition.execute()){
+            vTable.enterLocalScope();
             stmtSeq.execute(dataScanner);
+            vTable.leaveLocalScope();
         }
     }
 }

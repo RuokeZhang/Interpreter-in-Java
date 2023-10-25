@@ -65,9 +65,13 @@ public class IfKeyword {
 
     void execute(Scanner dataScanner){
         if(condition.execute()){
+            vTable.enterLocalScope();
             thenStmtSeq.execute(dataScanner);
+            vTable.leaveLocalScope();
         }else if(elseStmtSeq != null){
+            vTable.enterLocalScope();
             elseStmtSeq.execute(dataScanner);
+            vTable.leaveLocalScope();
         }
     }
 

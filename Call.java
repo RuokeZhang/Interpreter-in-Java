@@ -1,10 +1,14 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Call {
     private Parameters parameters;
     private String functionName;
 
     private VariableTable vTable;
+
 
     public Call(VariableTable vTable){
         this.vTable = vTable;
@@ -43,10 +47,24 @@ public class Call {
     }
     void execute(Scanner dataScanner) {
         Function function=vTable.getFunctionByName(functionName);
+        List<int[]> actualParameters = getParametersValues();
         vTable.enterScope();
-        function.execute(dataScanner, parameters);
+        function.execute(dataScanner, actualParameters);
         vTable.leaveScope();
     }
+    List<int[]> getParametersValues() {
+        List<int[]> tempValues = new ArrayList<>();
+    //System.out.println("parameters.getParameters(): " + parameters.getParameters());
+        for (String actualParamName : parameters.getParameters()) {
+            //System.out.println("actualParamName: " + actualParamName);
+
+            int[] value = vTable.getArrValue(actualParamName);
+            //System.out.println("value: " + value[0]);
+            tempValues.add(value);
+        }
+        return tempValues;
+    }
+
 
 
 
