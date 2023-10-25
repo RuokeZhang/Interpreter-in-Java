@@ -76,9 +76,9 @@ class Decl {
 
     void execute() {
         if (declType == Core.INTEGER) {
-            vTable.addGlobalVariable(id, declType);
+            vTable.addVariable(id, declType);
         } else if (declType == Core.ARRAY) {
-            vTable.addGlobalVariable(id, declType);
+            vTable.addVariable(id, declType);
         }
     }
 

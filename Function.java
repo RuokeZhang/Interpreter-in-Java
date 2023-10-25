@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.lang.reflect.Parameter;
+import java.util.HashMap;
 import java.util.List;
 
 public class Function {
@@ -9,6 +10,7 @@ public class Function {
 
     private Parameters formalParameters;
     private Scanner dataScanner;
+
 
     public Function(VariableTable vTable, Scanner dataScanner) {
         this.vTable = vTable;
@@ -67,22 +69,22 @@ public class Function {
         System.out.println("end;");
     }
 
-    void execute(Scanner dataScanner, Parameters actualParameters){
-        vTable.enterScope();
+    void execute(Scanner dataScanner, List<int[]> actualParameters){
+        vTable.enterLocalScope();
         setParameters(actualParameters);
         stmtSeq.execute(dataScanner);
-        vTable.leaveScope();
+        vTable.leaveLocalScope();
     }
 
-    void setParameters(Parameters actualParameters) {
+    void setParameters(List<int[]> actualParameters) {
         List<String> formalParamNames = formalParameters.getParameters();
-        List<String> actualParamNames = actualParameters.getParameters();
 
         for (int i = 0; i < formalParamNames.size(); i++) {
             String formalParamName = formalParamNames.get(i);
-            String actualParamName = actualParamNames.get(i);
-            vTable.addLocalVariable(formalParamName, Core.ARRAY);
-            vTable.store(formalParamName, vTable.getArrValue((actualParamName)));
+            vTable.addVariable(formalParamName, Core.ARRAY);
+            //System.out.println("first parameter value to be stored: "+actualParameters.get(i)[0]);
+            vTable.store(formalParamName, actualParameters.get(i));
+            //System.out.println("formalParamName: " + formalParamName+"has been stored in the vTable. Its value is: "+vTable.getArrValue(formalParamName)[0]);
         }
     }
 
