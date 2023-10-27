@@ -106,7 +106,6 @@ public class VariableTable {
         return global.containsKey(var);
     }
 
-
     public void checkVariableType(String var, Core expectedType) {
         Core actualType = getVariableType(var);
         if (actualType != expectedType) {
@@ -138,110 +137,122 @@ public class VariableTable {
     }
 
 
-        void store (String var,int index, int value){
-            if (isGlobal(var)) {
-                if (global.get(var).arrayValue == null) {
-                    System.out.println("ERROR: Array " + var + " is not initialized globally");
-                    System.exit(1);
-                }
-                if (index >= global.get(var).arrayValue.length) {
-                    System.out.println("ERROR: Array " + var + " index out of bounds");
-                    System.exit(1);
-                }
-                global.get(var).arrayValue[index] = value;
-            } else {
-                Stack<HashMap<String, Value>> local = frames.peek();
-                for (Map<String, Value> scope : local) {
-                    if (scope.containsKey(var)) {
-                        if (scope.get(var).arrayValue == null) {
-
-                            System.out.println("ERROR: Array " + var + " is not initialized locally");
-                            for (String s : scope.keySet()) {
-                                System.out.println(s);
-                            }
-                            System.exit(1);
-                        }
-                        if (index >= scope.get(var).arrayValue.length) {
-                            System.out.println("ERROR: Array " + var + " index out of bounds");
-                            System.exit(1);
-                        }
-                        scope.get(var).arrayValue[index] = value;
+    void store(String var, int index, int value) {
+        if (isGlobal(var)) {
+            if (global.get(var).arrayValue == null) {
+                System.out.println("ERROR: Array " + var + " is not initialized globally");
+                System.exit(1);
+            }
+            if (index >= global.get(var).arrayValue.length) {
+                System.out.println("ERROR: Array " + var + " index out of bounds");
+                System.exit(1);
+            }
+            global.get(var).arrayValue[index] = value;
+        } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
+            for (Map<String, Value> scope : local) {
+                if (scope.containsKey(var)) {
+                    if (scope.get(var).arrayValue == null) {
+                        System.out.println("ERROR: Array " + var + " is not initialized locally");
+                        System.exit(1);
                     }
+                    if (index >= scope.get(var).arrayValue.length) {
+                        System.out.println("ERROR: Array " + var + " index out of bounds");
+                        System.exit(1);
+                    }
+                    scope.get(var).arrayValue[index] = value;
                 }
             }
         }
-
-        void store (String var,int[] value){
-            if (isGlobal(var)) {
-                global.get(var).arrayValue = value;
-            } else {
-                Stack<HashMap<String, Value>> local = frames.peek();
-                for (Map<String, Value> scope : local) {
-                    if (scope.containsKey(var)) {
-                        scope.get(var).arrayValue = value;
-                    }
-                }
-            }
-        }
-
-        void newArray (String var,int size){
-            if (isGlobal(var)) {
-                global.get(var).arrayValue = new int[size];
-            } else {
-                Stack<HashMap<String, Value>> local = frames.peek();
-                for (Map<String, Value> scope : local) {
-                    if (scope.containsKey(var)) {
-                        scope.get(var).arrayValue = new int[size];
-                    }
-                }
-            }
-        }
-
-        int getIntValue (String var){
-            if (isGlobal(var)) {
-                return global.get(var).intValue;
-            } else {
-                Stack<HashMap<String, Value>> local = frames.peek();
-                for (Map<String, Value> scope : local) {
-                    if (scope.containsKey(var)) {
-                        return scope.get(var).intValue;
-                    }
-                }
-            }
-            return 0;
-        }
-
-        int[] getArrValue (String var){
-            if (isGlobal(var)) {
-                return global.get(var).arrayValue;
-            } else {
-                Stack<HashMap<String, Value>> local = frames.peek();
-                for (Map<String, Value> scope : local) {
-                    if (scope.containsKey(var)) {
-                        return scope.get(var).arrayValue;
-                    }
-                }
-            }
-            return null;
-        }
-
-        int getIntValue (String var,int index){
-            if (isGlobal(var)) {
-
-                return global.get(var).arrayValue[index];
-            } else {
-                Stack<HashMap<String, Value>> local = frames.peek();
-                for (Map<String, Value> scope : local) {
-                    if (scope.containsKey(var)) {
-                        return scope.get(var).arrayValue[index];
-                    }
-                }
-            }
-            return 0;
-        }
-
-        Function getFunctionByName (String functionName){
-            return functions.get(functionName);
-        }
-
     }
+
+    void store(String var, int[] value) {
+        if (isGlobal(var)) {
+            global.get(var).arrayValue = value;
+        } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
+            for (Map<String, Value> scope : local) {
+                if (scope.containsKey(var)) {
+                    scope.get(var).arrayValue = value;
+                }
+            }
+        }
+    }
+
+    void newArray(String var, int size) {
+        if (isGlobal(var)) {
+            global.get(var).arrayValue = new int[size];
+        } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
+            for (Map<String, Value> scope : local) {
+                if (scope.containsKey(var)) {
+                    scope.get(var).arrayValue = new int[size];
+                }
+            }
+        }
+    }
+
+
+    int getIntValue(String var) {
+        if (isGlobal(var)) {
+            return global.get(var).intValue;
+        } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
+            for (Map<String, Value> scope : local) {
+                if (scope.containsKey(var)) {
+                    return scope.get(var).intValue;
+                }
+            }
+        }
+        return 0;
+    }
+
+    int[] getArrValue(String var) {
+        if (isGlobal(var)) {
+            return global.get(var).arrayValue;
+        } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
+            for (Map<String, Value> scope : local) {
+                if (scope.containsKey(var)) {
+                    return scope.get(var).arrayValue;
+                }
+            }
+        }
+        return null;
+    }
+
+    int getIntValue(String var, int index) {
+        if (isGlobal(var)) {
+
+            return global.get(var).arrayValue[index];
+        } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
+            for (Map<String, Value> scope : local) {
+                if (scope.containsKey(var)) {
+                    return scope.get(var).arrayValue[index];
+                }
+            }
+        }
+        return 0;
+    }
+
+    Function getFunctionByName(String functionName) {
+        return functions.get(functionName);
+    }
+
+    boolean variableIsInitialized(String var) {
+        if (isGlobal(var)) {
+            return global.get(var).arrayValue != null;
+        } else {
+            Stack<HashMap<String, Value>> local = frames.peek();
+            for (Map<String, Value> scope : local) {
+                if (scope.containsKey(var)) {
+                    if (scope.get(var).arrayValue != null) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}

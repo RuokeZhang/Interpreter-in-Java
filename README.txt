@@ -1,9 +1,10 @@
 Author: Ruoke Zhang
 
 Files:
-.
 ├── Assign.class
 ├── Assign.java
+├── Call.class
+├── Call.java
 ├── Comparison.class
 ├── Comparison.java
 ├── Condition$1.class
@@ -108,6 +109,10 @@ Files:
 │   ├── 30.data
 │   ├── 30.expected
 │   ├── 30.student
+│   ├── 31.code
+│   ├── 31.data
+│   ├── 31.expected
+│   ├── 31.student
 │   ├── 4.code
 │   ├── 4.data
 │   ├── 4.expected
@@ -138,6 +143,8 @@ Files:
 ├── DeclSeq.class
 ├── DeclSeq.java
 ├── Error
+│   ├── 00.code
+│   ├── 00.data
 │   ├── 01.code
 │   ├── 01.data
 │   ├── 02.code
@@ -145,11 +152,19 @@ Files:
 │   ├── 03.code
 │   ├── 03.data
 │   ├── 04.code
-│   └── 04.data
+│   ├── 04.data
+│   ├── 05.code
+│   ├── 05.data
+│   ├── 06.code
+│   ├── 06.data
+│   ├── 07.code
+│   └── 07.data
 ├── Expression.class
 ├── Expression.java
 ├── Factor.class
 ├── Factor.java
+├── Function.class
+├── Function.java
 ├── IfKeyword.class
 ├── IfKeyword.java
 ├── InKeyword.class
@@ -160,10 +175,13 @@ Files:
 ├── Main.java
 ├── OutKeyword.class
 ├── OutKeyword.java
+├── Parameters.class
+├── Parameters.java
 ├── ParserUtils.class
-├── ParserUtils.java # This file contains utility methods that the Parser utilizes. These methods assist in parsing and interpreting the code, making the parsing process more organized and modular.
+├── ParserUtils.java
 ├── Procedure.class
 ├── Procedure.java
+├── Project3.iml
 ├── README.txt
 ├── Scanner.class
 ├── Scanner.java
@@ -175,40 +193,33 @@ Files:
 ├── Term.java
 ├── VariableTable$Value.class
 ├── VariableTable.class
-├── VariableTable.java #This serves as the memory class for the interpreter. It handles semantic checks and manages the values of variables. The VariableTable ensures that the variables are accessed and modified correctly and provides mechanisms for error checks related to variable operations.
-├── docs
-│   └── 3341 Project 3.pdf
-└── scripts
-    └── tester.sh
+├── VariableTable.java
+└── tester.sh
 
-5 directories, 175 files
-
-
+Function.java is the most important file in this project. It contains the implementation of the function calls.
+Call.java handles the function calls.
+Parameters.java stores the parameters of a function call.
 
 Features:
-1. Early Variable Storage: During the parsing phase, upon encountering a variable declaration, I immediately store it in the Variable Table.
-I adopted this approach primarily because, in the language, variables have default values.
-Thus, even before an assignment statement, the variable won't be undefined, ensuring the program's robustness.
+1. I like the setParameter() function in the Function class. It is a very elegant way to pass the parameters.
 
 2. Unified Function Calls: In the Variable Table, I've overridden the store() and getIntValue() functions.
 This means that regardless of the type of value you wish to store or retrieve, the same function name can be used.
 The purpose of this is to simplify the interface, making function calls more intuitive, and reducing errors from forgetting function names.
 
-
 Interpreter Design:
-Variable Management with Value Tracking:
-The interpreter uses a structure called VariableTable to manage variables.
-Within this table, each variable is associated with a Value object.
-This Value object is a wrapper class that contains the variable's value and type.
-
-Scope Management and Variable Hiding:
-Variables are categorized into global and local.
-For global variables, they are stored in a map. For local variables, they are placed in the topmost map of a stack.
-Every time a function is called, the enterScope method is used, which adds a new map to the top of the local stack.
-
+The call stack is implemented using a stack of stacks of maps. The bottom stack is the global scope. The top stack is the local scope.
+Every time a function is called, a new map is added to the top of the stack. When the function returns, the top map is removed from the stack.
 
 Testing&bugs:
 Bugs: First and foremost, there are no known bugs in the interpreter.
 
-Testing Approach: After completing all the execute methods, I ran the correct test files.
-I discovered several errors. To pinpoint the sources of these errors, I set up numerous outputs within both the parse and execute methods.
+Testing Approach: Because I do the semantic checking during parsing in my previous project, I met some problem when I tried to parse the function calls.
+So I decided to do the semantic at last.
+I first modified the parser to parse the function calls, and test it using the printer.
+After making sure the parser works, I started to implement the execution part.
+It took me some time to figure out how to pass the values to the formal parameters.
+And I figured it out by considering the nature of passing by sharing in Java.
+When I implemented the store() function to assign an array with the value of another array, I found that the array is not copied, but shared.
+So I could simply use store() again to assign the value of the formal parameter to the actual parameter.
+I used the same test cases as the previous project, and I also added some new test cases to test the function calls.

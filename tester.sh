@@ -117,6 +117,17 @@ fi
 echo ""
 echo ""
 
+echo "Running 08.error:"
+echo "-----Student Output Starts-----"
+timeout 5 ${runner} Error/08.code Error/08.data
+echo "-----Student Output Ends-----"
+read -n 1 -p "Number of formal parameters and actual parameters doesn't match. Error message related to that? (y/n)" mainmenuinput
+if [ $mainmenuinput = "y" ]; then
+	error=$(($error + 1))
+fi
+echo ""
+echo ""
+
 echo "Correct cases score out of 30:"
 echo $score
 echo "Error cases score out of 7:"

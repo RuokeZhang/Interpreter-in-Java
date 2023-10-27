@@ -55,11 +55,12 @@ public class Function {
         //Expecting an END token
         ParserUtils.handleExpectedToken(scanner, Core.END);
     }
-    final String getFunctionName(){
+
+    final String getFunctionName() {
         return functionName;
     }
 
-    void print(){
+    void print() {
         System.out.print("procedure " + functionName + "(");
         formalParameters.print();
         System.out.println(")");
@@ -68,25 +69,37 @@ public class Function {
         System.out.println("end;");
     }
 
-    void execute(Scanner dataScanner, List<int[]> actualParameters){
+    void execute(Scanner dataScanner, List<int[]> actualParameters) {
+        checkDuplicateFormalParameters();
         vTable.enterLocalScope();
         setParameters(actualParameters);
         stmtSeq.execute(dataScanner);
         vTable.leaveLocalScope();
     }
 
-    void setParameters(List<int[]> actualParameters) {
-        List<String> formalParamNames = formalParameters.getParameters();
-
-        for (int i = 0; i < formalParamNames.size(); i++) {
-            String formalParamName = formalParamNames.get(i);
-            vTable.addVariable(formalParamName, Core.ARRAY);
-            //System.out.println("first parameter value to be stored: "+actualParameters.get(i)[0]);
-            vTable.store(formalParamName, actualParameters.get(i));
-            //System.out.println("formalParamName: " + formalParamName+"has been stored in the vTable. Its value is: "+vTable.getArrValue(formalParamName)[0]);
+    void checkDuplicateFormalParameters() {
+        HashMap<String, Integer> map = new HashMap<>();
+        for (String parameter : formalParameters.getParameters()) {
+            if (map.containsKey(parameter)) {
+                System.out.println("ERROR: Duplicate formal parameter " + parameter);
+                System.exit(1);
+            }
+            map.put(parameter, 1);
         }
     }
 
+    void setParameters(List<int[]> actualParameters) {
+        List<String> formalParamNames = formalParameters.getParameters();
+        if (formalParamNames.size() != actualParameters.size()) {
+            System.out.println("ERROR: Number of formal parameters and actual parameters do not match");
+            System.exit(1);
+        }
+        for (int i = 0; i < formalParamNames.size(); i++) {
+            String formalParamName = formalParamNames.get(i);
+            vTable.addVariable(formalParamName, Core.ARRAY);
+            vTable.store(formalParamName, actualParameters.get(i));
+        }
+    }
 
 
 }

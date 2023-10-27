@@ -1,14 +1,15 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class Call {
     private Parameters parameters;
     private String functionName;
 
-    private VariableTable vTable;
 
+    private VariableTable vTable;
 
     public Call(VariableTable vTable) {
         this.vTable = vTable;
@@ -48,25 +49,47 @@ public class Call {
 
     void execute(Scanner dataScanner) {
         Function function = vTable.getFunctionByName(functionName);
-        if(!vTable.functionExists(functionName)){
-            System.out.println("ERROR: Function "+functionName+" not declared in this scope");
+        if (!vTable.functionExists(functionName)) {
+            System.out.println("ERROR: Function " + functionName + " not declared in this scope");
             System.exit(1);
         }
+        checkActualParametersDeclared();
+        checkActualParametersInitialized();
         List<int[]> actualParameters = getParametersValues();
         vTable.enterScope();
         function.execute(dataScanner, actualParameters);
         vTable.leaveScope();
     }
+void checkActualParametersInitialized(){
+        List<String> actualParameters = parameters.getParameters();
+        for (String actualParameter : actualParameters) {
+            if (!vTable.variableIsInitialized(actualParameter)) {
+                System.out.println("ERROR: Variable " + actualParameter + " not initialized in this scope");
+                System.exit(1);
+            }
+        }
+}
+    void checkActualParametersDeclared() {
+        List<String> actualParameters = parameters.getParameters();
+        for (String actualParameter : actualParameters) {
+            if (!vTable.variableExists(actualParameter)) {
+                System.out.println("ERROR: Variable " + actualParameter + " not declared in this scope");
+                System.exit(1);
+            }
+        }
+    }
 
+    /**
+     * Returns the values of the parameters of the function call
+     *
+     * @return List of int[] containing the values of the parameters
+     */
     List<int[]> getParametersValues() {
         List<int[]> tempValues = new ArrayList<>();
-        //System.out.println("parameters.getParameters(): " + parameters.getParameters());
         for (String actualParamName : parameters.getParameters()) {
             int[] value = vTable.getArrValue(actualParamName);
             tempValues.add(value);
         }
         return tempValues;
     }
-
-
 }
