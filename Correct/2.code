@@ -1,11 +1,7 @@
-procedure c2 is
-	procedure A ( r ) is
-		r[0] := 7;
-	end
-	array x;
+procedure t2 is
+	array y;
 begin
-	x := new integer[1];
-	x := 1;
-	begin A(x);
-	out(x[0]);
+	y := new integer[1];
+	y[0] := 10;
+	out(y);
 end

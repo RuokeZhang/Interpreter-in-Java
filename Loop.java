@@ -45,6 +45,7 @@ public class Loop {
         while(condition.execute()){
             vTable.enterLocalScope();
             stmtSeq.execute(dataScanner);
+            vTable.decrementBlockVariable();
             vTable.leaveLocalScope();
         }
     }

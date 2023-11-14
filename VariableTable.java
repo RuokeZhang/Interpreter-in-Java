@@ -1,33 +1,21 @@
-import java.util.HashSet;
 import java.util.Stack;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
 
 public class VariableTable {
 
-    static class Value {
-        Core type;
-        int intValue;
-        int[] arrayValue;
-
-        public Value(Core dataType, int intValue, int[] arrValue) {
-            this.type = dataType;
-            this.intValue = intValue;
-            this.arrayValue = arrValue;
-        }
-    }
+    private static int gc = 0;
 
     HashMap<String, Value> global = new HashMap<>();
 
     HashMap<String, Function> functions = new HashMap<>();
     Stack<Stack<HashMap<String, Value>>> frames = new Stack<>();
 
-
     public void enterScope() {
         // Create a new frame when entering a function
         Stack<HashMap<String, Value>> newFrame = new Stack<>();
-        newFrame.push(new HashMap<>());
         // Push the new function frame to the stack
         frames.push(newFrame);
     }
@@ -53,7 +41,6 @@ public class VariableTable {
             global.put(var, new Value(dataType, 0, null));
         }
     }
-
 
     public boolean variableExists(String var) {
         if (global.containsKey(var)) {
@@ -136,7 +123,6 @@ public class VariableTable {
         }
     }
 
-
     void store(String var, int index, int value) {
         if (isGlobal(var)) {
             if (global.get(var).arrayValue == null) {
@@ -166,18 +152,45 @@ public class VariableTable {
         }
     }
 
-    void store(String var, int[] value) {
+    void store(String var, Value value) {
         if (isGlobal(var)) {
-            global.get(var).arrayValue = value;
+            global.put(var, value);
         } else {
             Stack<HashMap<String, Value>> local = frames.peek();
             for (Map<String, Value> scope : local) {
                 if (scope.containsKey(var)) {
-                    scope.get(var).arrayValue = value;
+                    scope.put(var, value);
                 }
             }
         }
     }
+
+
+
+    /*
+     * public void alias(String lhs, String rhs) {
+     * Value rhsValue = getValue(rhs);
+     *
+     * // Assign rhs's Value object to lhs
+     * store(lhs, rhsValue);
+     *
+     * // Increment reference count since lhs is now an additional reference
+     * incrementRefCount(rhs);
+     * }
+     */
+
+    /*
+     * private void store(String var, Value value) {
+     * // Assigns the given Value object to the specified variable
+     * if (isGlobal(var)) {
+     * global.put(var, value);
+     * } else {
+     * Stack<HashMap<String, Value>> local = frames.peek();
+     * Map<String, Value> currentScope = local.peek();
+     * currentScope.put(var, value);
+     * }
+     * }
+     */
 
     void newArray(String var, int size) {
         if (isGlobal(var)) {
@@ -192,48 +205,30 @@ public class VariableTable {
         }
     }
 
-
-    int getIntValue(String var) {
+    Value getValue(String var) {
         if (isGlobal(var)) {
-            return global.get(var).intValue;
+            return global.get(var);
         } else {
             Stack<HashMap<String, Value>> local = frames.peek();
-            for (Map<String, Value> scope : local) {
+            for (HashMap<String, Value> scope : local) {
                 if (scope.containsKey(var)) {
-                    return scope.get(var).intValue;
-                }
-            }
-        }
-        return 0;
-    }
-
-    int[] getArrValue(String var) {
-        if (isGlobal(var)) {
-            return global.get(var).arrayValue;
-        } else {
-            Stack<HashMap<String, Value>> local = frames.peek();
-            for (Map<String, Value> scope : local) {
-                if (scope.containsKey(var)) {
-                    return scope.get(var).arrayValue;
+                    return scope.get(var);
                 }
             }
         }
         return null;
     }
 
-    int getIntValue(String var, int index) {
-        if (isGlobal(var)) {
+    int getIntValue(String var) {
+        return getValue(var).intValue;
+    }
 
-            return global.get(var).arrayValue[index];
-        } else {
-            Stack<HashMap<String, Value>> local = frames.peek();
-            for (Map<String, Value> scope : local) {
-                if (scope.containsKey(var)) {
-                    return scope.get(var).arrayValue[index];
-                }
-            }
-        }
-        return 0;
+    int[] getArrValue(String var) {
+        return getValue(var).arrayValue;
+    }
+
+    int getIntValue(String var, int index) {
+        return getValue(var).arrayValue[index];
     }
 
     Function getFunctionByName(String functionName) {
@@ -254,5 +249,71 @@ public class VariableTable {
             }
         }
         return false;
+    }
+
+    void incrementRefCount(String var) {
+        Value val = getValue(var);
+        if (val != null && val.arrayValue != null) {
+            val.rc++;
+            System.err.print("increment ref count: " + var + " ");
+            System.err.println("rc: " + val.rc);
+        }
+    }
+
+    void decrementRefCount(String var) {
+        Value val = getValue(var);
+        if (val != null && val.arrayValue != null) {
+            val.rc--;
+            System.err.print("decrement ref count: " + var + " ");
+            System.err.println("rc: " + val.rc);
+            if (val.rc == 0) {
+                System.out.println("gc: " + --gc);
+                System.err.println("gc: " + gc);
+            }
+        }
+
+    }
+
+    void decrementBlockVariable() {
+        List<String> blockVariables = getBlockVariables();
+        for (String variable : blockVariables) {
+            if (Core.ARRAY == getVariableType(variable)&& getRefCount(variable) > 0) {
+                System.err.println("decrementing ref count for block variable: " + variable);
+                decrementRefCount(variable);
+            }
+        }
+    }
+
+    List<String> getBlockVariables() {
+        List<String> blockVariables = new ArrayList<>();
+        Stack<HashMap<String, Value>> local = frames.peek();
+        Map<String, Value> currentScope = local.peek();
+        for (String variable : currentScope.keySet()) {
+            blockVariables.add(variable);
+        }
+        return blockVariables;
+    }
+
+    void clearGlobalVariable() {
+        // set the ref count of global variables to 0
+        for (String var : global.keySet()) {
+            if (Core.ARRAY == global.get(var).type&& getRefCount(var) > 0) {
+                System.err.println("clear global variable: " + var);
+                decrementRefCount(var);
+            }
+        }
+    }
+
+    int getRefCount(String var) {
+        Value val = getValue(var);
+        if (val != null && val.arrayValue != null) {
+            return val.rc;
+        }
+        return 0;
+    }
+
+    void printMessage() {
+        System.out.println("gc: " + ++gc);
+        System.err.println("gc: " + gc);
     }
 }

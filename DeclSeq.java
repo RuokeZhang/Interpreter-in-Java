@@ -1,15 +1,12 @@
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class DeclSeq {
     private List<Decl> declSeq = new ArrayList<>();
     private List<Function> functionSeq = new ArrayList<>();
     private VariableTable vTable;
-    private List<String> order = new ArrayList<>();
 
     public DeclSeq(VariableTable vTable) {
         this.vTable = vTable;

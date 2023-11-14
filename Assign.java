@@ -116,11 +116,23 @@ public class Assign {
         } else if (type == 2) {
             vTable.checkVariableType(id, Core.ARRAY);
             vTable.newArray(id, newIntegerExpr.execute());
+            //set reference counting
+            vTable.incrementRefCount(id);
+            vTable.printMessage();
         } else if (type == 3) {
             vTable.checkVariableType(id, Core.ARRAY);
             vTable.checkVariableType(secId, Core.ARRAY);
             vTable.checkVariableDeclared(secId);
-            vTable.store(id, vTable.getArrValue(secId));
+            //before we store the array, we need to decrement the reference count of the array that is being overwritten
+            if(vTable.getRefCount(id) > 0){
+                System.err.println("When doing array to array assignment, the array being overwritten should have a ref count decremented");
+                vTable.decrementRefCount(id);
+            }
+            vTable.store(id, vTable.getValue(secId));
+            //increment the reference count of the array object
+            if(vTable.getRefCount(secId) > 0){
+                vTable.incrementRefCount(secId);
+            }
         }
 
     }

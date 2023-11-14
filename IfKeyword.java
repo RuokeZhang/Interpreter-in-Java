@@ -67,12 +67,16 @@ public class IfKeyword {
         if(condition.execute()){
             vTable.enterLocalScope();
             thenStmtSeq.execute(dataScanner);
+            //TODO: before leaving the scope, we need to set the ref count of all variables to 0
+            vTable.decrementBlockVariable();
             vTable.leaveLocalScope();
         }else if(elseStmtSeq != null){
             vTable.enterLocalScope();
             elseStmtSeq.execute(dataScanner);
+            vTable.decrementBlockVariable();
             vTable.leaveLocalScope();
         }
     }
+
 
 }
