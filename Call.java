@@ -8,7 +8,6 @@ public class Call {
     private Parameters parameters;
     private String functionName;
 
-
     private VariableTable vTable;
 
     public Call(VariableTable vTable) {
@@ -27,17 +26,17 @@ public class Call {
         functionName = scanner.getId();
         scanner.nextToken();
 
-        //Expecting a LPAREN token
+        // Expecting a LPAREN token
         ParserUtils.handleExpectedToken(scanner, Core.LPAREN);
 
-        //Parse parameters
+        // Parse parameters
         parameters = new Parameters(vTable);
         parameters.parse(scanner);
 
-        //Expecting a RPAREN token
+        // Expecting a RPAREN token
         ParserUtils.handleExpectedToken(scanner, Core.RPAREN);
 
-        //Expecting a SEMICOLON token
+        // Expecting a SEMICOLON token
         ParserUtils.handleExpectedToken(scanner, Core.SEMICOLON);
     }
 
@@ -55,12 +54,13 @@ public class Call {
         }
         checkActualParametersDeclared();
         checkActualParametersInitialized();
-        List<int[]> actualParameters = getParametersValues();
+        List<Value> actualParameters = getParametersValues();
         vTable.enterScope();
         function.execute(dataScanner, actualParameters);
         vTable.leaveScope();
     }
-void checkActualParametersInitialized(){
+
+    void checkActualParametersInitialized() {
         List<String> actualParameters = parameters.getParameters();
         for (String actualParameter : actualParameters) {
             if (!vTable.variableIsInitialized(actualParameter)) {
@@ -68,7 +68,8 @@ void checkActualParametersInitialized(){
                 System.exit(1);
             }
         }
-}
+    }
+
     void checkActualParametersDeclared() {
         List<String> actualParameters = parameters.getParameters();
         for (String actualParameter : actualParameters) {
@@ -84,12 +85,21 @@ void checkActualParametersInitialized(){
      *
      * @return List of int[] containing the values of the parameters
      */
-    List<int[]> getParametersValues() {
-        List<int[]> tempValues = new ArrayList<>();
+    List<Value> getParametersValues() {
+        List<Value> tempValues = new ArrayList<>();
         for (String actualParamName : parameters.getParameters()) {
-            int[] value = vTable.getArrValue(actualParamName);
+            Value value = vTable.getValue(actualParamName);
             tempValues.add(value);
         }
         return tempValues;
+    }
+
+    List<Integer> getParametersRc() {
+        List<Integer> tempRc = new ArrayList<>();
+        for (String actualParamName : parameters.getParameters()) {
+            int rc = vTable.getValue(actualParamName).rc;
+            tempRc.add(rc);
+        }
+        return tempRc;
     }
 }

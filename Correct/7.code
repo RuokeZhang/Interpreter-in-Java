@@ -1,15 +1,15 @@
-procedure c7 is
-	procedure A ( r ) is 
-		r[0] := 9;
-	end
-	procedure B ( s ) is
-		s[0] := 7;
-		begin A(s);
-	end
+procedure t7 is
+	integer x;
+	integer y;
+	array a;
+	array b;
 begin
-	array q;
-	q := new integer[1];
-	q[0] := 5;
-	begin B(q);
-	out(q[0]);
+	x := 10;
+	y := 1;
+	while y < x do
+		a := array b;
+		a := new integer[1];
+		a[0] := 100;
+		y := y+1;
+	end
 end

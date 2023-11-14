@@ -1,23 +1,17 @@
-procedure c8 is
-	procedure A ( r, s ) is
-		r[0] := 3; 
-		s[0] := 5; 
+procedure t8 is
+	procedure A(r) is
+		array n;
+		if r < 1 then
+			out(r);
+		else
+			n := new integer[1];
+			n[0] := r-1;
+			begin A(n);
+		end
 	end
-	procedure B ( r, s ) is
-		r[0] := 7; 
-		s[0] := 11; 
-	end
+	array a;
 begin
-	array x;
-	array y;
-	x := new integer[1];
-	y := new integer[1];
-	x[0] := 1;
-	y[0] := 1;
-	begin A(x, y);
-	out(x[0]);
-	out(y[0]);
-	begin B(x, y);
-	out(x[0]);
-	out(y[0]);
+	a := new integer[1];
+	a[0] := 5;
+	begin A(a);
 end

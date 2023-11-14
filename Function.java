@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,10 +6,8 @@ public class Function {
     private String functionName;
     private StmtSeq stmtSeq;
     private VariableTable vTable;
-
     private Parameters formalParameters;
     private Scanner dataScanner;
-
 
     public Function(VariableTable vTable, Scanner dataScanner) {
         this.vTable = vTable;
@@ -69,11 +66,16 @@ public class Function {
         System.out.println("end;");
     }
 
-    void execute(Scanner dataScanner, List<int[]> actualParameters) {
+    void execute(Scanner dataScanner, List<Value> actualParameters) {
         checkDuplicateFormalParameters();
         vTable.enterLocalScope();
         setParameters(actualParameters);
         stmtSeq.execute(dataScanner);
+        //decrement ref count for all variables in the scope
+        //clearFormalParameters();
+        //TODO: Before leaving this local scope, all the variables except the formal parameters should have a ref count of 0
+        System.err.println("clearing local scope when leaving function");
+        vTable.decrementBlockVariable();
         vTable.leaveLocalScope();
     }
 
@@ -88,7 +90,7 @@ public class Function {
         }
     }
 
-    void setParameters(List<int[]> actualParameters) {
+    void setParameters(List<Value> actualParameters) {
         List<String> formalParamNames = formalParameters.getParameters();
         if (formalParamNames.size() != actualParameters.size()) {
             System.out.println("ERROR: Number of formal parameters and actual parameters do not match");
@@ -98,6 +100,14 @@ public class Function {
             String formalParamName = formalParamNames.get(i);
             vTable.addVariable(formalParamName, Core.ARRAY);
             vTable.store(formalParamName, actualParameters.get(i));
+            vTable.incrementRefCount(formalParamName);
+        }
+    }
+
+    void clearFormalParameters() {
+        List<String> formalParamNames = formalParameters.getParameters();
+        for (String formalParamName : formalParamNames) {
+            vTable.decrementRefCount(formalParamName);
         }
     }
 

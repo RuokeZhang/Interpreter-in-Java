@@ -82,7 +82,9 @@ public class Procedure {
         vTable.enterScope();
         vTable.enterLocalScope();
         stmtSeq.execute(dataScanner);
+        vTable.decrementBlockVariable();
         vTable.leaveLocalScope();
         vTable.leaveScope();
+        vTable.clearGlobalVariable();
     }
 }

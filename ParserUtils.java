@@ -80,7 +80,7 @@ public class ParserUtils {
                 token == Core.IN ||
                 token == Core.INTEGER ||
                 token == Core.ARRAY ||
-                token == Core.BEGIN;// Assuming BOOL is another starting token for decl
+                token == Core.BEGIN;
 
     }
 

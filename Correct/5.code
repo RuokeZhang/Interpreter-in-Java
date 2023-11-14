@@ -1,16 +1,19 @@
-procedure c5 is
-	procedure A ( r, s ) is 
-		r[0] := 0; 
-		s[0] := 0; 
+procedure t5 is
+	procedure A(x) is
+		array y;
+		y := new integer[1]; 
+		y[0] := 8; 
+		out(x); 
+		x := array y; 
 	end
+	integer m;
+	integer n;
+	array z;
 begin
-	array x;
-	array y;
-	x := new integer[1];
-	y := new integer[1];
-	x[0] := 1;
-	y[0] := 1;
-	begin A(x, y);
-	out(x[0]);
-	out(y[0]);
+	m := 10;
+	n := 5;
+	z := new integer[1];
+	z[0] := m+n;
+	begin A(z);
+	out(m);
 end
