@@ -71,10 +71,6 @@ public class Function {
         vTable.enterLocalScope();
         setParameters(actualParameters);
         stmtSeq.execute(dataScanner);
-        //decrement ref count for all variables in the scope
-        //clearFormalParameters();
-        //TODO: Before leaving this local scope, all the variables except the formal parameters should have a ref count of 0
-        System.err.println("clearing local scope when leaving function");
         vTable.decrementBlockVariable();
         vTable.leaveLocalScope();
     }

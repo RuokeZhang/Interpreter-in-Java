@@ -125,7 +125,6 @@ public class Assign {
             vTable.checkVariableDeclared(secId);
             //before we store the array, we need to decrement the reference count of the array that is being overwritten
             if(vTable.getRefCount(id) > 0){
-                System.err.println("When doing array to array assignment, the array being overwritten should have a ref count decremented");
                 vTable.decrementRefCount(id);
             }
             vTable.store(id, vTable.getValue(secId));

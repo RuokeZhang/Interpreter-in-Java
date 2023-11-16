@@ -255,8 +255,6 @@ public class VariableTable {
         Value val = getValue(var);
         if (val != null && val.arrayValue != null) {
             val.rc++;
-            System.err.print("increment ref count: " + var + " ");
-            System.err.println("rc: " + val.rc);
         }
     }
 
@@ -264,11 +262,8 @@ public class VariableTable {
         Value val = getValue(var);
         if (val != null && val.arrayValue != null) {
             val.rc--;
-            System.err.print("decrement ref count: " + var + " ");
-            System.err.println("rc: " + val.rc);
             if (val.rc == 0) {
                 System.out.println("gc: " + --gc);
-                System.err.println("gc: " + gc);
             }
         }
 
@@ -278,7 +273,6 @@ public class VariableTable {
         List<String> blockVariables = getBlockVariables();
         for (String variable : blockVariables) {
             if (Core.ARRAY == getVariableType(variable)&& getRefCount(variable) > 0) {
-                System.err.println("decrementing ref count for block variable: " + variable);
                 decrementRefCount(variable);
             }
         }
@@ -298,7 +292,6 @@ public class VariableTable {
         // set the ref count of global variables to 0
         for (String var : global.keySet()) {
             if (Core.ARRAY == global.get(var).type&& getRefCount(var) > 0) {
-                System.err.println("clear global variable: " + var);
                 decrementRefCount(var);
             }
         }
@@ -314,6 +307,5 @@ public class VariableTable {
 
     void printMessage() {
         System.out.println("gc: " + ++gc);
-        System.err.println("gc: " + gc);
     }
 }

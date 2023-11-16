@@ -21,6 +21,7 @@ public class StmtSeq {
         }
         if (stmtSeq.isEmpty()) {
             System.out.println("ERROR: No statements found!");
+            System.out.println(s.currentToken());
             System.exit(1);
         }
     }
